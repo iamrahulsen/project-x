@@ -1,2 +1,2 @@
-# project-x
-Platform for Connection Communities
+# Project X - Connecting Communities
+Project X is a website which makes the process of making the final year project or any project including research work of a student convenient and smooth by helping them to connect to the like-minded people through the website. The front end of the website was done using HTML, CSS(Bootstrap), JavaScript(jQuery) and the back end and the database connection was done with PHP and SQL. The recommendation system implemented in this website is done with the help of KNN machine learning algorithm.
