@@ -1,0 +1,102 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .hello-mes{
+          font-size: 18px;
+          color: rgb(182, 59, 59);
+          margin-right: 20px;
+        }
+      </style>
+</head>
+<body>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02"></div>
+          <div class="navbar-nav ml-auto">
+            {% ifequal user name %}
+            <a class="nav-item nav-link active" href="{% url 'mentor_logout' %}">Log Out</a>
+            {% endifequal %}
+          </div>
+        </div>
+<div class="row">
+    {% ifequal user name %}
+    <div class="col-md">
+        <div class="card card-body">
+            <div class="form-row">
+                <h5 class="hello-mes">Hello {{user}}</h5>
+                <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'mentor_profile' mentor.id %}">Update Information</a>
+            </div>
+        </div>
+    </div>
+    {% endifequal %}
+    <!-- 
+    <div class="col-md">
+        <div class="card card-body" id="work">
+            <h5>Students</h5>
+            <hr>
+            {% for i in projects %}
+            <p>{{i.students}} <a class="btn btn-sm btn-info" href="{% url 'student' i.students.id %}"> View</a></p>
+            {% endfor %}
+        </div>
+    </div>
+    -->
+    <div class="col-md">
+        <div class="card card-body" id="total">
+            <h5>Total Projects</h5>
+            <hr>
+            <h3 style="text-align: center;">{{count}}</h3>
+        </div>
+    </div>
+    <div class="col-sm-3 order-first order-sm-last order-lg-3">
+        <ul class="list-group">
+          <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+          <li class="list-group-item text-right"><span class="pull-left" id="cnt_rating"><strong>Rating</strong></span>{{rating}}</li>
+          <li class="list-group-item text-right"><span class="pull-left" id="cnt_rating"><strong>Degree</strong></span>{{mentor.Degree}}</li>
+          <li class="list-group-item text-right"><span class="pull-left" ><strong>College</strong></span>{{mentor.college}}</li>
+          <li class="list-group-item text-right"><span class="pull-left" ><strong>Papers</strong></span>{{mentor.number_of_papers}}</li>
+          <li class="list-group-item text-right"><span class="pull-left" ><strong>Fellowship</strong></span>{{mentor.fellowship}}</li>
+    
+          {% ifequal user name %}
+          <li class="list-group-item text-right"><span class="pull-left" id="cnt_rating"><strong>Project Requests</strong></span>{{request}}</li>
+          {% endifequal %}
+        </ul>
+      </div>
+</div>
+<br>
+
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Projects</th>
+                    <th>Starting Date</th>
+                    <th>Ending Date</th>
+                    <th>Student Working</th>
+                    <th>Status</th>
+                </tr>
+                {% for i in projects %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.date_started}}</td>
+                    <td>{{i.date_finished}}</td>
+                    <td><a href="{% url 'student' i.students.id %}">{{i.students}}</a></td>
+                    <td>{{i.status}}</td>
+                    {% ifequal user name %}
+                    <td><a class="btn btn-sm btn-info" href="{% url 'edit_project' i.id %}">Details</a></td>
+                    {% endifequal %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}
+
+

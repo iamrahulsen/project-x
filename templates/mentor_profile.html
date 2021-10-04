@@ -1,0 +1,115 @@
+{% extends 'home.html' %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+
+<div class="row"> 
+    <div class="col-md-3">
+        <div class="text-center">
+            <img src="{{request.user.professor.profile_pic.url}}" class="avatar img-circle img-thumbnail" alt="avatar">
+             <h6 class="p-t-30 p-b-40">Upload a different photo...</h6>
+           </div>
+    </div>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-personal" role="tabpanel" aria-labelledby="nav-personal-tab">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputFname">First Name</label>
+                        {% render_field form.first_name class="form-control input100" placeholder="First name" %} 
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputMname">Middle Name</label>
+                        {% render_field form.middle_name class="form-control input100" placeholder="middle name" %}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputLname">Last Name</label>
+                        {% render_field form.last_name class="form-control input100" %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4 offset-md-1">
+                        <label for="inputDOB">Date of Birth</label>
+                        {% render_field form.dob class="form-control input100" type="date" %}
+                    </div>
+                    <div class="form-group col-md-4 offset-md-1">
+                            <label for="inputDOB">Phone No</label>
+                            {% render_field form.phone class="form-control input100"%}
+                    </div>
+                    <div class="form-group offset-md-1 col-md-4">
+                            <label for="inputGender">Gender</label>
+                            {% render_field form.gender class="form-control input100" %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                            <label for="inputEmail4">Email</label>
+                            {% render_field form.email class="form-control input100" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="inputAddress2">Address</label>
+                            {% render_field form.address class="form-control input100" placeholder="Apartment, studio, or floor" %}
+                    </div>
+                    <div class="form-group">
+                            <label for="inputAddress2">Institute</label>
+                            {% render_field form.college class="form-control input100"%}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                            <label for="inputCountry">Country</label>
+                            {% render_field form.country class="form-control input100" %}
+                    </div>
+                    <div class="form-group col-md-5">
+                            <label for="inputState">State</label>
+                            {% render_field form.state class="form-control input100" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        {% render_field form.city class="form-control input100" %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="inputZip">Zip</label>
+                        {% render_field form.zip class="form-control input100" %}
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputState">Marital Status</label>
+                        {% render_field form.marital_status class='form-control input100' type='date' %}
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputState">Degree</label>
+                        {% render_field form.Degree class='form-control input100' %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="inputState">Availability</label>
+                        {% render_field form.available class='form-control input100' %}
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputState">Fellowship</label>
+                        {% render_field form.fellowship class='form-control input100' %}
+                    </div>
+                    <div class="form-group col-md-5">
+                      <label for="inputState">Number of Papers</label>
+                      {% render_field form.number_of_papers class='form-control input100' %}
+                    </div>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputPic"> Change Profile Pic</label>
+                    {% render_field form.profile_pic type="file" class="text-center center-block file-upload" %}
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-md" id="save_btn">Save</button>
+                    <button type="submit" class="btn btn-primary btn-md" id="cancel_btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!--</form> --> 
+    </div>
+</div>
+{% endblock %}

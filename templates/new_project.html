@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+{% block content %}
+{% load widget_tweaks %}
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="field">
+        <label class="label">Name of the Project</label>
+        <div class="control">
+            {% render_field form.name class="form-control input100" %}
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Student</label>
+        {% render_field form.students class="form-control input100" %}
+    </div>
+    <div class="field">
+        <label class="label">Current Status</label>
+        {% render_field form.status class="form-control input100" %}
+    </div>
+    <div class="field">
+        <label class="label">Choose Mentor</label>
+        {% render_field form.mentors class="form-control input100" %}
+    </div>
+    <div class="field">
+        <label class="label">Finishing Date</label>
+        {% render_field form.date_finished class='form-control input100' type="date" %}
+    </div>
+    <div class="field">
+        <label class="label">Description</label>
+        {% render_field form.description class="form-control input100" %}
+    </div>
+    
+    <input class="btn btn-primary btn-md" type="submit" name="Submit" id="">
+</form>
+{% for i in messages %}    
+<p>{{i}}</p>
+{% endfor %}
+{% endblock %}

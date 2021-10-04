@@ -1,0 +1,99 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+    .hello-mes{
+      font-size: 18px;
+      color: rgb(243, 35, 35);
+      margin-right: 20px;
+    }
+  </style>
+<br>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+      <div class="navbar-nav ml-auto">
+        {% ifequal request.user.username name %}
+        <a class="nav-item nav-link active" href="{% url 'student_logout' %}">Log Out</a>
+        {% endifequal %}
+      </div>
+  </nav>
+<div class="row">
+    {% ifequal request.user.username name %}
+    <div class="col-md">
+        <div class="card card-body">
+            <div class="form-row">
+                <h5 class="hello-mes">Hello {{request.user}}</h5>
+                <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'student_profile' student.id %}">Update Information</a>
+            <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'new_project' student.id %}">Start New Project</a>
+            </div>
+        </div>
+    </div>
+    {% endifequal %}
+    <!-- 
+    <div class="col-md">
+        <div class="card card-body" id="work">
+            <h5>Mentors</h5>
+            <hr>
+            {% for i in projects %}
+            <p>{{i.mentors}} <a class="btn btn-sm btn-info" href="{% url 'mentor' i.mentors.id %}"> View</a></p>
+            {% endfor %}
+        </div>
+    </div>
+    -->
+    <div class="col-md">
+        <div class="card card-body" id="total">
+            <h5>Total Projects</h5>
+            <hr>
+            <h3 style="text-align: center; padding: 10px">{{count}}</h3>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body" id="finished">
+            <h5>Finished Projects</h5>
+            <hr>
+            <h3 style="text-align: center; padding: 10px">{{finished}}</h3>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body" id="ongoing">
+            <h5>Ongoing Projects</h5>
+            <hr>
+            <h3 style="text-align: center; padding: 10px">{{ongoing}}</h3>
+        </div>
+    </div>
+</div>
+<br>
+<div class="col-sm-3 order-first order-sm-last order-lg-3">
+    <ul class="list-group">
+      <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+      <li class="list-group-item text-right"><span class="pull-left" id="cnt_rating"><strong>Rating</strong></span>{{rating}}</li>
+      <li class="list-group-item text-right"><span class="pull-left" id="cnt_rating"><strong>Experience</strong></span>{{student.experience}}</li>
+      <li class="list-group-item text-right"><span class="pull-left" ><strong>College</strong></span>{{student.college}}</li>
+    </ul>
+  </div>
+<br>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Projects</th>
+                    <th>Starting Date</th>
+                    <th>Ending Date</th>
+                    <th>Mentor</th>
+                    <th>Status</th>
+                </tr>
+                {% for i in projects %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.date_started}}</td>
+                    <td>{{i.date_finished}}</td>
+                    <td><a href="{% url 'mentor' i.mentors.id %}">{{i.mentors}}</a></p></td>
+                    <td>{{i.status}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
